@@ -7,7 +7,7 @@ from passenger_requests.views import passenger_request,get_status,get_driver,get
 from testing.views import checkmatch,register,checkproof,picupload,forgetpass, getAvgRating, get_user
 from example.estimatedFareCalculationModule import getEstFare
 from example.actualFareCalculationModule import getActFare
-from driver_request.views import driver_request, player_id, end_journey, complete, start_journey
+from driver_request.views import driver_request, player_id, end_journey, complete, start_journey, paid
 
 # Serializers define the API representation.
 
@@ -45,6 +45,8 @@ urlpatterns = [
     url(r'^start_journey', start_journey),
     url(r'^complete', complete),
     url(r'^flag',check_flag),
+    url(r'^paid', paid),
+
 
     url(r'^passenger_request', passenger_request),
     url(r'^status', get_status),
