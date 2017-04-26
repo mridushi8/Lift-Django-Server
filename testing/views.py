@@ -146,4 +146,9 @@ def getAvgRating(request):
     print rating_user.avg_rating
     return HttpResponse("")
 
+def get_user(request):
+    Id = request.data['id']
+    req = Trip_Request.objects.get(id=Id)
+    return HttpResponse(json.dumps(req.as_json()), content_type="application/json")
+
 	
