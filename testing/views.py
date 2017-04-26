@@ -127,13 +127,23 @@ def forgetpass(request):
 @api_view(['GET', 'POST'])       
 @permission_classes((permissions.AllowAny,))
 def getAvgRating(request):
-    number = request.data['rating']
-    userid = request.data['userid']
+    number = float(request.data['rating'])
+    userid = int(request.data['userid'])
     rating_user = User()
     rating_user = User.objects.get(id=userid)
+
+    if rating_user.number_of_ratings == None:
+        rating_user.number_of_ratings = 0
+    if rating_user.avg_rating == None:
+        rating_user.avg_rating = "0"
+
+    avg_rating = float(rating_user.avg_rating)
+
     rating_user.number_of_ratings = rating_user.number_of_ratings + 1
-    rating_user.avg_rating = (rating_user.avg_rating * (rating_user.number_of_ratings-1) + number)/ rating_user.number_of_ratings
+    avg_rating = (avg_rating * (rating_user.number_of_ratings-1) + number)/ rating_user.number_of_ratings
+    rating_user.avg_rating = str(avg_rating)
     rating_user.save()
+    print rating_user.avg_rating
     return HttpResponse("")
 
 	
