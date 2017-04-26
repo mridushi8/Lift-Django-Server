@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^checkproof$', views.checkproof, name='checkproof'),
     url(r'^picupload$', views.picupload, name='picupload'),
     url(r'^forgetpass$', views.forgetpass, name='forgetpass')
+    url(r'^get_user$', views.get_user, name='get_user')
+
 
 
 ]
