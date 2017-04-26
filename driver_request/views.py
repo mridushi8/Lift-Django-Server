@@ -62,3 +62,15 @@ def complete(request):
     Trip_Request.objects.get(request_id=passenger_id).delete()
     Driver_Request.objects.get(request_id = Id).delete()
     return HttpResponse("Done")
+
+@api_view(['GET','POST'])
+@permission_classes((permissions.AllowAny,))
+def paid(request):
+    Id = request.data['id']
+    req = Trip_Request()
+    req = Trip_Request.objects.filter(driver_id=Id).first()
+    req.payment_done = True
+    req.save()
+    return HttpResponse("Done")
+
+    
