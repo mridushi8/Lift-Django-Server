@@ -6,6 +6,8 @@ from datetime import datetime
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics, permissions
 from datetime import datetime, time as datetime_time, timedelta
+from driver_request.models import Driver_Request
+from passenger_requests.models import Trip_Request
 
 import functools
 import hashlib
@@ -27,10 +29,17 @@ def getActFare(request):
     if request.method == "POST":
         distance = float(request.POST["distance"])
         startTime = request.POST["startTime"]
+        Id = request.POST["driver_id"]
         endTime = datetime.now()
         startTimeConverted = datetime.strptime(startTime, '%b %d %Y %H:%M')
 
         a = actualFareCalculate()
+        req = Trip_Request()
+        req = Trip_Request.objects.filter(driver_id=Id).first()
+        req.actual_fare = a.getActualFare(distance, startTimeConverted, endTime)
+        req.save()
+        print (req.actual_fare)
+
         return HttpResponse(a.getActualFare(distance, startTimeConverted, endTime))
 
 class actualFareCalculate():

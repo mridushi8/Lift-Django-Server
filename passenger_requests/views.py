@@ -48,6 +48,7 @@ def get_passenger(request):
     return HttpResponse(json.dumps(req.as_json()), content_type="application/json")
 
 
+
 @api_view(['GET', 'POST'])
 @permission_classes((permissions.AllowAny,))
 def get_status(request): #Function to return status of request, polled continously by passenger's app

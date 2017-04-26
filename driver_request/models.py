@@ -10,6 +10,7 @@ class Driver_Request(models.Model):
     destination_long = models.CharField(max_length=200)
     timestamp = models.CharField(max_length=200)
     player_id = models.CharField(null=True,max_length = 500)
+    actual_fare = models.CharField(max_length=10, null=True)
 
     def as_json(self):
         return dict(
@@ -18,4 +19,5 @@ class Driver_Request(models.Model):
             source_long=self.source_long,
             destination_lat=self.destination_lat,
             destination_long = self.destination_long,
-            timestamp = self.timestamp)
+            timestamp = self.timestamp,
+            actual_fare = self.actual_fare)

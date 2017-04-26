@@ -7,7 +7,7 @@ class User(models.Model):
     name = models.CharField(max_length=100)
     email= models.EmailField()
     pic = models.FileField(null = True, max_length = 10485760)
-    phone = models.IntegerField()
+    phone = models.TextField()
     home_add= models.TextField()
     carno= models.CharField(max_length=100)
     identity = models.FileField(null = True, max_length = 10485760)

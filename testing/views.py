@@ -118,17 +118,20 @@ def forgetpass(request):
             checkuser.save()
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
-            server.login("arushibutan11@gmail.com", "#########")
+            server.login("liftcarapp@gmail.com", "liftcarapp1234")
             msg = "Your new pssword is "+pwd +"."
-            server.sendmail("arushibutan11@gmail.com", id, msg)
+            server.sendmail("liftcarapp@gmail.com", id, msg)
             server.quit()
             return Response("done")
-
+        
+@api_view(['GET', 'POST'])       
+@permission_classes((permissions.AllowAny,))
 def getAvgRating(request):
     number = request.data['rating']
     userid = request.data['userid']
-    rating_user = User.get(Userid=userid)
-    rating_user.number_of_ratings += 1
+    rating_user = User()
+    rating_user = User.objects.get(id=userid)
+    rating_user.number_of_ratings = rating_user.number_of_ratings + 1
     rating_user.avg_rating = (rating_user.avg_rating * (rating_user.number_of_ratings-1) + number)/ rating_user.number_of_ratings
     rating_user.save()
     return HttpResponse("")
