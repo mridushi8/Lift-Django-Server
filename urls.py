@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^checkproof$', checkproof),
     url(r'^picupload$', picupload),
     url(r'^forgetpass$', forgetpass),
-    url(r'^get_user$', get_user)
+    url(r'^get_user$', get_user),
 
 
     url(r'^rating', getAvgRating),
