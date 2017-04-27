@@ -4,10 +4,10 @@ from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import serializers, viewsets, routers
 from passenger_requests.views import passenger_request,get_status,get_driver,get_passenger,driver_response,accept_driver, check_flag, check_payment
-from testing.views import checkmatch,register,checkproof,picupload,forgetpass, getAvgRating
+from testing.views import checkmatch,register,checkproof,picupload,forgetpass, getAvgRating, get_user
 from example.estimatedFareCalculationModule import getEstFare
 from example.actualFareCalculationModule import getActFare
-from driver_request.views import driver_request, player_id, end_journey, complete, start_journey
+from driver_request.views import driver_request, player_id, end_journey, complete, start_journey, paid
 
 # Serializers define the API representation.
 
@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^checkproof$', checkproof),
     url(r'^picupload$', picupload),
     url(r'^forgetpass$', forgetpass),
+    url(r'^get_user$', get_user)
+
 
     url(r'^rating', getAvgRating),
 
@@ -43,6 +45,8 @@ urlpatterns = [
     url(r'^start_journey', start_journey),
     url(r'^complete', complete),
     url(r'^flag',check_flag),
+    url(r'^paid', paid),
+
 
     url(r'^passenger_request', passenger_request),
     url(r'^status', get_status),
