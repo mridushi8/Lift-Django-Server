@@ -15,7 +15,7 @@ class Trip_Request(models.Model):
     timestamp = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     phone_no = models.CharField(max_length=200)
-    actual_fare = models.CharField(max_length=10)
+    actual_fare = models.CharField(max_length=20)
     driver_accept = models.CharField(max_length = 100)
     payment_done = models.BooleanField(default = False)
  

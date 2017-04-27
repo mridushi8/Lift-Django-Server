@@ -19,6 +19,7 @@ import time
 import json
 import googlemaps
 from django.http import HttpResponse
+from math import floor
 
 from googlemaps import convert
 from googlemaps.convert import as_list
@@ -27,6 +28,7 @@ from googlemaps.convert import as_list
 @permission_classes((permissions.AllowAny,))
 def getActFare(request):
     if request.method == "POST":
+#print request.data
         distance = float(request.POST["distance"])
         startTime = request.POST["startTime"]
         Id = request.POST["driver_id"]
@@ -37,13 +39,12 @@ def getActFare(request):
         req = Trip_Request()
         req = Trip_Request.objects.filter(driver_id=Id).first()
         req.actual_fare = a.getActualFare(distance, startTimeConverted, endTime)
+        req.actual_fare = str(int(floor(req.actual_fare)))
         req.save()
-        print (req.actual_fare)
 
         return HttpResponse(a.getActualFare(distance, startTimeConverted, endTime))
 
 class actualFareCalculate():
-
     def getActualFare(self, distance, startTime, endTime):
         dist = distance
         sTime= startTime
@@ -59,5 +60,5 @@ class actualFareCalculate():
         distace_value = distance_rate * dist
         actual_fare = base_fare + time_value + distace_value
 
-        return str(actual_fare)
+        return actual_fare
 
